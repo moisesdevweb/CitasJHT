@@ -19,7 +19,7 @@ const phrases = [
   "No te arrepentirás"
 ];
 
-// --- NUEVAS URLs (Más estables para evitar error 404) ---
+// --- URLs (Tus Gifs de Batman/Gatos) ---
 const gifs = [
   // 0: Feliz / Bailando (Inicio)
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NW5rMDg2bGVsdjFveHpxYXF4enhhdnM3ZXVudGc0NGtnbzBhN3lwZCZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/9um7C26pOXFOiex4Qb/giphy.gif",
@@ -35,9 +35,6 @@ const gifs = [
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MjhrbG9vYnV2NDdoY2NmNTJ1NWU0MWUzOG9zajVsNzl2dm5xdmtoaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2SCG9rbE1X2FSemSje/giphy.gif",
   "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm1yc2MwZDJ3anFpeXF1OGFwejVqdXQwMnV1dHZ3dWk0eTNwOGJyaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4V3RuU0zSq1SC8Hh4x/giphy.gif",
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YzBsZmgwODFicnBiZHd3aWwwaHVscmxzb2t0NXl4bmNvcjc3bG5ibSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/FeeShV3yKc8P6/giphy.gif"
-
-  
-
 ];
 
 // Gif del final (Beso / Abrazo)
@@ -50,32 +47,49 @@ export default function AskOut() {
   const [isMoved, setIsMoved] = useState(false);
 
   // El botón "Sí" crece con cada "No"
-  // Limitamos el crecimiento para que no rompa el diseño demasiado rápido
   const yesScale = 1 + noCount * 0.15; 
-  
-  // A partir de 8 intentos, el botón SÍ ocupa toda la pantalla
   const isFullScreenYes = noCount >= 8;
 
   // Seleccionamos el GIF y la frase actual
   const currentGif = gifs[Math.min(noCount, gifs.length - 1)];
   const currentPhrase = phrases[Math.min(noCount, phrases.length - 1)];
 
-  // Función para mover el botón No a una posición aleatoria REAL
+  // Función para mover el botón No a una posición aleatoria SEGURA
   const moveNoBtn = useCallback(() => {
     if (typeof window === "undefined") return;
 
-    // Obtenemos dimensiones de la ventana
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
+    const btnWidth = 150; // Ancho estimado del botón
+    const btnHeight = 60; // Alto estimado
+
+    // Definimos el centro de la pantalla (donde está el botón SÍ y la tarjeta)
+    const centerX = windowWidth / 2;
+    const centerY = windowHeight / 2;
     
-    // Generamos coordenadas aleatorias (dejando un margen para que no se salga)
-    // Usamos valores en píxeles para mayor precisión
-    const randomX = Math.random() * (windowWidth - 150); // 150px ancho aprox botón
-    const randomY = Math.random() * (windowHeight - 60); // 60px alto aprox botón
+    // Margen de seguridad (zona prohibida alrededor del centro)
+    // Hacemos el área un poco grande para asegurarnos de que no tape la tarjeta
+    const safeMarginX = 160; // +/- pixeles desde el centro horizontal
+    const safeMarginY = 220; // +/- pixeles desde el centro vertical
+
+    let newX, newY;
+    let attempts = 0;
+
+    // Intentamos buscar una coordenada que NO esté en el centro
+    do {
+      newX = Math.random() * (windowWidth - btnWidth);
+      newY = Math.random() * (windowHeight - btnHeight);
+      attempts++;
+    } while (
+      // Condición de solapamiento: Si cae dentro de la caja central prohibida
+      (newX > centerX - safeMarginX && newX < centerX + safeMarginX) &&
+      (newY > centerY - safeMarginY && newY < centerY + safeMarginY) &&
+      attempts < 15 // Límite de intentos para evitar cuelgues
+    );
 
     setNoPos({ 
-      left: `${randomX}px`, 
-      top: `${randomY}px` 
+      left: `${newX}px`, 
+      top: `${newY}px` 
     });
     
     setIsMoved(true);
@@ -85,44 +99,29 @@ export default function AskOut() {
     setNoCount((prev) => prev + 1);
     moveNoBtn();
   };
+
   // --- FUNCIÓN DE FUEGOS ARTIFICIALES ---
   const triggerFireworks = () => {
-    const duration = 15 * 1000; // Duración: 15 segundos
+    const duration = 15 * 1000;
     const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
     const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
     const interval = setInterval(() => {
       const timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
+      if (timeLeft <= 0) return clearInterval(interval);
 
       const particleCount = 50 * (timeLeft / duration);
-      
-      // Cohetes desde la izquierda y derecha aleatoriamente
-      // Usamos colores románticos: Rosas, Rojos, Dorados, Blancos
       const colors = ['#ff0000', '#ffa500', '#ff69b4', '#ff1493', '#ffffff', '#ffd700'];
 
-      confetti({
-        ...defaults, 
-        particleCount,
-        origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 },
-        colors: colors
-      });
-      confetti({
-        ...defaults, 
-        particleCount,
-        origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 },
-        colors: colors
-      });
+      confetti({ ...defaults, particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 }, colors });
+      confetti({ ...defaults, particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 }, colors });
     }, 250);
   };
+
   const onYes = () => {
     setView("yes");
-    triggerFireworks(); // Disparar la pirotecnia
+    triggerFireworks();
     confetti({
       particleCount: 150,
       spread: 70,
@@ -150,9 +149,9 @@ export default function AskOut() {
             transition={{ duration: 0.3 }}
             className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 text-center border border-white/50 relative"
           >
-            {/* Imagen del Gatito */}
+            {/* Imagen del Gatito/Batman */}
             <motion.div 
-              key={currentGif} // Clave única para forzar la animación al cambiar de GIF
+              key={currentGif}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
@@ -160,7 +159,7 @@ export default function AskOut() {
             >
               <img 
                 src={currentGif} 
-                alt="Gatito reacción" 
+                alt="Reacción" 
                 className="h-full object-contain filter drop-shadow-md" 
               />
             </motion.div>
@@ -172,7 +171,7 @@ export default function AskOut() {
               Janeth, promete ser genial... ✨
             </p>
 
-            <div className="flex items-center justify-center gap-18 relative h-16 w-full">
+            <div className="flex items-center justify-center gap-8 relative h-16 w-full">
               
               {/* Botón SÍ */}
               <motion.button
@@ -205,7 +204,7 @@ export default function AskOut() {
                 <motion.button
                   // Eventos para Desktop y Móvil
                   onMouseEnter={handleNoInteraction} 
-                  onTouchStart={handleNoInteraction} // Mejor soporte para móvil
+                  onTouchStart={handleNoInteraction}
                   onClick={handleNoInteraction}
                   
                   // Estilos de posición
@@ -217,7 +216,7 @@ export default function AskOut() {
                   
                   // Animación suave al moverse
                   animate={{ 
-                    x: [0, -5, 5, -5, 5, 0], // Pequeño temblor antes de irse
+                    x: [0, -5, 5, -5, 5, 0],
                     transition: { duration: 0.2 } 
                   }}
                   
