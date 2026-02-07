@@ -32,7 +32,12 @@ const gifs = [
   // 4: Llorando mucho
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anIza2piYXFoczh5OWhhdG1nYjFveWZyb2ZtY3Jzc2RweDVzbXkzbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ar71Hyi0ZKejXzMoNs/giphy.gif",
   // 5: Gato tirado
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MjhrbG9vYnV2NDdoY2NmNTJ1NWU0MWUzOG9zajVsNzl2dm5xdmtoaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2SCG9rbE1X2FSemSje/giphy.gif"
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MjhrbG9vYnV2NDdoY2NmNTJ1NWU0MWUzOG9zajVsNzl2dm5xdmtoaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2SCG9rbE1X2FSemSje/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm1yc2MwZDJ3anFpeXF1OGFwejVqdXQwMnV1dHZ3dWk0eTNwOGJyaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4V3RuU0zSq1SC8Hh4x/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YzBsZmgwODFicnBiZHd3aWwwaHVscmxzb2t0NXl4bmNvcjc3bG5ibSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/FeeShV3yKc8P6/giphy.gif"
+
+  
+
 ];
 
 // Gif del final (Beso / Abrazo)
