@@ -43,7 +43,7 @@ export default function HeartsBackground() {
         }
         ctx!.globalAlpha = h.opacity;
         ctx!.font = `${h.size}px serif`;
-        ctx!.fillText("❤️", h.x, h.y);
+        ctx!.fillText("🔥", h.x, h.y);
       });
       requestAnimationFrame(animate);
     }

@@ -85,9 +85,44 @@ export default function AskOut() {
     setNoCount((prev) => prev + 1);
     moveNoBtn();
   };
+  // --- FUNCIÓN DE FUEGOS ARTIFICIALES ---
+  const triggerFireworks = () => {
+    const duration = 15 * 1000; // Duración: 15 segundos
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
+    const random = (min: number, max: number) => Math.random() * (max - min) + min;
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      
+      // Cohetes desde la izquierda y derecha aleatoriamente
+      // Usamos colores románticos: Rosas, Rojos, Dorados, Blancos
+      const colors = ['#ff0000', '#ffa500', '#ff69b4', '#ff1493', '#ffffff', '#ffd700'];
+
+      confetti({
+        ...defaults, 
+        particleCount,
+        origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 },
+        colors: colors
+      });
+      confetti({
+        ...defaults, 
+        particleCount,
+        origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 },
+        colors: colors
+      });
+    }, 250);
+  };
   const onYes = () => {
     setView("yes");
+    triggerFireworks(); // Disparar la pirotecnia
     confetti({
       particleCount: 150,
       spread: 70,
@@ -137,7 +172,7 @@ export default function AskOut() {
               Janeth, promete ser genial... ✨
             </p>
 
-            <div className="flex items-center justify-center gap-4 relative h-16 w-full">
+            <div className="flex items-center justify-center gap-18 relative h-16 w-full">
               
               {/* Botón SÍ */}
               <motion.button
