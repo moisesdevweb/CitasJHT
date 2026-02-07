@@ -10,10 +10,10 @@ const phrases = [
   "¿Estás segura?",
   "¡Será genial!",
   "Por favor 🥺",
-  "¡Mira al gatito!",
+  "¡Mira al batman!",
   "¡Está llorando! 😭",
   "¡No seas cruel!",
-  "¡Voy a morir de amor!",
+  "¡Voy a morir de tristeza!",
   "¡Di que sí!",
   "Andaaa...",
   "No te arrepentirás"
@@ -131,10 +131,10 @@ export default function AskOut() {
             </motion.div>
 
             <h1 className="text-3xl font-extrabold text-gray-800 mb-2 tracking-tight">
-              ¿Quieres tener una cita conmigo? 🌹
+              ¿Quieres tener una salida conmigo? 🌹
             </h1>
             <p className="text-gray-500 font-medium mb-8">
-              Janeth, promete ser inolvidable... ✨
+              Janeth, promete ser genial... ✨
             </p>
 
             <div className="flex items-center justify-center gap-4 relative h-16 w-full">
@@ -212,13 +212,13 @@ export default function AskOut() {
               ¡Sabía que dirías que sí! ❤️
             </h2>
             <p className="text-gray-500 text-lg mb-8 font-medium">
-              ¡Paso por ti a las 8!
+              ¡Paso por ti a las 5:00 PM!
             </p>
             <button
               onClick={reset}
               className="text-sm text-gray-400 underline hover:text-gray-600 transition-colors"
             >
-              Volver a jugar
+              Volver a intentarlo
             </button>
           </motion.div>
         )}
