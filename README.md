@@ -1,10 +1,9 @@
-💘 Cita San Valentín - Web Interactiva
+##  💘 Cita San Valentín - Web Interactiva
 
 Una aplicación web divertida y romántica diseñada para pedir una cita de una forma original e imposible de rechazar. Inspirada en el trend viral de TikTok de los gatitos "Mochi Peach Cat".
 
 (Puedes reemplazar este link con una captura de pantalla de tu propia web)
-## Getting Started
-✨ Características
+## ✨ Características
 
 Botón "No" Escurridizo: El botón se mueve aleatoriamente cada vez que intentan pulsarlo o pasar el mouse por encima. ¡Es inatrapable!
 
@@ -18,7 +17,7 @@ Efecto de Celebración: Explosión de confeti al aceptar la cita.
 
 Totalmente Responsivo: Funciona perfecto en celulares y computadoras.
 
-🛠️ Tecnologías Usadas
+##  🛠️ Tecnologías Usadas
 
 Next.js - El framework de React para producción.
 
@@ -30,7 +29,7 @@ Canvas Confetti - Para el efecto de celebración.
 
 TypeScript - Para un código más robusto y seguro.
 
-🚀 Instalación y Uso Local
+##  🚀 Instalación y Uso Local
 
 Sigue estos pasos para correr el proyecto en tu computadora:
 
@@ -66,8 +65,8 @@ Busca la sección comentada como // --- ZONA DE CONFIGURACIÓN ---.
 
 Ahí podrás modificar:
 
-# gifs: Array con los enlaces de las imágenes/GIFs que salen según el nivel de "rechazo".
+- gifs: Array con los enlaces de las imágenes/GIFs que salen según el nivel de "rechazo".
 
-# phrases: Las frases que aparecen en el botón rojo (ej: "¿Estás segura?", "¡No me hagas esto!").
+- phrases: Las frases que aparecen en el botón rojo (ej: "¿Estás segura?", "¡No me hagas esto!").
 
-# successGif: El GIF que sale al final cuando dicen que SÍ.
+- successGif: El GIF que sale al final cuando dicen que SÍ.
