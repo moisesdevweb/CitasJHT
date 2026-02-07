@@ -6,8 +6,8 @@ import HeartsBackground from "./components/HeartsBackground";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Janeth, ¿Quieres ser mi cita? 🌹",
-  description: "¿Quieres ser mi cita?",
+  title: "Janeth, ¿Quieres salir conmigo? 🌹",
+  description: "¿Quieres ser boba en esta salida?",
 };
 
 export default function RootLayout({
