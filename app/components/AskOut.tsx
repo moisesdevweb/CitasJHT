@@ -171,7 +171,7 @@ export default function AskOut() {
               Janeth, promete ser genial... ✨
             </p>
 
-            <div className="flex items-center justify-center gap-8 relative h-16 w-full">
+            <div className="flex items-center justify-center gap-16 relative h-16 w-full">
               
               {/* Botón SÍ */}
               <motion.button
